@@ -12,25 +12,21 @@ namespace Calculator_WinForm
 {
     public partial class Form1 : Form
     {
+        List<string> number = new List<string>();
         public Form1()
         {
             InitializeComponent();
             this.BackColor = Color.AliceBlue;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OnButtonClick(object sender, EventArgs e)
         {
-            MessageBox.Show("1");
+            var btn=sender as Button;
+            number.Add(btn.Text);
+            textBox.Text=number.;
+            textBox.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("0");
-        }
+       
     }
 }
