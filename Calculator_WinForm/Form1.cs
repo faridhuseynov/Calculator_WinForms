@@ -35,7 +35,8 @@ namespace Calculator_WinForm
             if (_operator.Length != 0)
                 _operator.Clear();
             _operator.Append(btn.Text);
-
+            string num = number.ToString();
+            result += Int32.Parse(num);
             number.Clear();
         }
     }
