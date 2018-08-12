@@ -15,7 +15,7 @@ namespace Calculator_WinForm
         bool firstentry = false;
         StringBuilder number = new StringBuilder();
         StringBuilder _operator = new StringBuilder();
-        int result = 0;
+        double result = 0;
         public Form1()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace Calculator_WinForm
             textBox.Text += btn.Text;
             textBox.Show();
         }
-        private void CalculationFunction(int num, string operate)
+        private bool CalculationFunction(double num, string operate)
         {
             if (operate == "+")
                 result += num;
@@ -42,21 +42,23 @@ namespace Calculator_WinForm
                     result /= num;
                 else
                 {
-                    textBox.Text = "Division to 0 is prohibited!";
-                    textBox.Show();
-                    textBox.Text.Remove(0);
+                    MessageBox.Show("Division to 0 is prohibited!");
+                    result = 0;
+                    textBox.Clear();
+                    number.Clear();
                     _operator.Clear();
-                    return;
+                    return false;
                 }
             }
             _operator.Remove(0, 1);
+            return true;
         }
         private void OnOperatorClick(object sender, EventArgs e)
         {
             if (firstentry == false)
             {
                 if (textBox.Text != "")
-                    result = Int32.Parse(textBox.Text);
+                    result = Double.Parse(textBox.Text);
                 firstentry = true;
             }
             var btn = sender as Button;
@@ -64,15 +66,17 @@ namespace Calculator_WinForm
             textBox.Show();
             _operator.Append(btn.Text);
             if (_operator.Length > 1)
-                CalculationFunction(Int32.Parse(number.ToString()), _operator[0].ToString());
+                CalculationFunction(Double.Parse(number.ToString()), _operator[0].ToString());
             number.Clear();
         }
         private void OnEqualClick(object sender, EventArgs e)
         {
-            CalculationFunction(Int32.Parse(number.ToString()), _operator[0].ToString());
-            number.Clear();
-            textBox.Text = result.ToString();
-            textBox.Show();
+            if (CalculationFunction(Double.Parse(number.ToString()), _operator[0].ToString()) == true)
+            {
+                number.Clear();
+                textBox.Text = result.ToString();
+                textBox.Show();
+            }
         }
 
         private void OnClearClick(object sender, EventArgs e)

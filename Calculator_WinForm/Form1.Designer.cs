@@ -46,6 +46,7 @@
             this.Equal = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
             this.BackspaceButton = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -214,9 +215,9 @@
             // Equal
             // 
             this.Equal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Equal.Location = new System.Drawing.Point(158, 531);
+            this.Equal.Location = new System.Drawing.Point(284, 531);
             this.Equal.Name = "Equal";
-            this.Equal.Size = new System.Drawing.Size(243, 70);
+            this.Equal.Size = new System.Drawing.Size(117, 70);
             this.Equal.TabIndex = 16;
             this.Equal.Text = "=";
             this.Equal.UseVisualStyleBackColor = true;
@@ -244,12 +245,24 @@
             this.BackspaceButton.UseVisualStyleBackColor = true;
             this.BackspaceButton.Click += new System.EventHandler(this.OnBackspaceClick);
             // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(158, 531);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(117, 70);
+            this.button7.TabIndex = 20;
+            this.button7.Text = ".";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.OnButtonClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(547, 671);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.BackspaceButton);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.Equal);
@@ -297,6 +310,7 @@
         private System.Windows.Forms.Button Equal;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button BackspaceButton;
+        private System.Windows.Forms.Button button7;
     }
 }
 
