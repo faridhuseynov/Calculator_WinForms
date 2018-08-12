@@ -15,7 +15,7 @@ namespace Calculator_WinForm
         bool firstentry = false;
         StringBuilder number = new StringBuilder();
         StringBuilder _operator = new StringBuilder();
-        int result = 0,numb=0;
+        int result = 0;
         public Form1()
         {
             InitializeComponent();
@@ -46,8 +46,10 @@ namespace Calculator_WinForm
                     textBox.Show();
                     textBox.Text.Remove(0);
                     _operator.Clear();
+                    return;
                 }
             }
+            _operator.Remove(0, 1);
         }
         private void OnOperatorClick(object sender, EventArgs e)
         {
@@ -62,18 +64,28 @@ namespace Calculator_WinForm
             textBox.Show();
             _operator.Append(btn.Text);
             if (_operator.Length > 1)
-            {
                 CalculationFunction(Int32.Parse(number.ToString()), _operator[0].ToString());
-                _operator.Remove(0, 1);
-            }
             number.Clear();
         }
         private void OnEqualClick(object sender, EventArgs e)
         {
             CalculationFunction(Int32.Parse(number.ToString()), _operator[0].ToString());
-            _operator.Remove(0, 1);
             number.Clear();
             textBox.Text = result.ToString();
+            textBox.Show();
+        }
+
+        private void OnClearClick(object sender, EventArgs e)
+        {
+            result = 0;
+            firstentry = false;
+            textBox.Text=textBox.Text.Remove(0);
+            textBox.Show();
+        }
+        private void OnBackspaceClick(object sender, EventArgs e)
+        {
+            textBox.Text=textBox.Text.Remove(textBox.TextLength-1);
+            number.Remove(number.Length - 1, 1);
             textBox.Show();
         }
     }
