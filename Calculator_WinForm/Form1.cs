@@ -15,19 +15,39 @@ namespace Calculator_WinForm
         bool firstentry = false;
         StringBuilder number = new StringBuilder();
         StringBuilder _operator = new StringBuilder();
-        int result = 0;
+        int result = 0,numb=0;
         public Form1()
         {
             InitializeComponent();
             this.BackColor = Color.AliceBlue;
         }
-
         private void OnButtonClick(object sender, EventArgs e)
         {
             var btn = sender as Button;
             number.Append(btn.Text);
             textBox.Text += btn.Text;
             textBox.Show();
+        }
+        private void CalculationFunction(int num, string operate)
+        {
+            if (operate == "+")
+                result += num;
+            else if (operate == "-")
+                result -= num;
+            else if (operate == "*")
+                result *= num;
+            else if (operate == "/")
+            {
+                if (num != 0)
+                    result /= num;
+                else
+                {
+                    textBox.Text = "Division to 0 is prohibited!";
+                    textBox.Show();
+                    textBox.Text.Remove(0);
+                    _operator.Clear();
+                }
+            }
         }
         private void OnOperatorClick(object sender, EventArgs e)
         {
@@ -40,53 +60,17 @@ namespace Calculator_WinForm
             var btn = sender as Button;
             textBox.Text += btn.Text;
             textBox.Show();
+            _operator.Append(btn.Text);
             if (_operator.Length > 1)
             {
-                string num = number.ToString(); ;
-                if (_operator[0].ToString() == "+")
-                    result += Int32.Parse(num);
-                else if (_operator[0].ToString() == "-")
-                    result -= Int32.Parse(num);
-                else if (_operator[0].ToString() == "*")
-                    result *= Int32.Parse(num);
-                else if (_operator[0].ToString() == "/")
-                {
-                    if (num != "0")
-                        result /= Int32.Parse(num);
-                    else
-                    {
-                        textBox.Text = "Division to 0 is prohibited!";
-                        textBox.Show();
-                        textBox.Text.Remove(0);
-                        _operator.Clear();
-                    }
-                }
+                CalculationFunction(Int32.Parse(number.ToString()), _operator[0].ToString());
                 _operator.Remove(0, 1);
             }
-            _operator.Append(btn.Text);
             number.Clear();
         }
         private void OnEqualClick(object sender, EventArgs e)
         {
-            string num = number.ToString(); ;
-            if (_operator[0].ToString() == "+")
-                result += Int32.Parse(num);
-            else if (_operator[0].ToString() == "-")
-                result -= Int32.Parse(num);
-            else if (_operator[0].ToString() == "*")
-                result *= Int32.Parse(num);
-            else if (_operator[0].ToString() == "/")
-            {
-                if (num != "0")
-                    result /= Int32.Parse(num);
-                else
-                {
-                    textBox.Text = "Division to 0 is prohibited!";
-                    textBox.Show();
-                    textBox.Text.Remove(0);
-                    _operator.Clear();
-                }
-            }
+            CalculationFunction(Int32.Parse(number.ToString()), _operator[0].ToString());
             _operator.Remove(0, 1);
             number.Clear();
             textBox.Text = result.ToString();
